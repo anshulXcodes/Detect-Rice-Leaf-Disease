@@ -1,0 +1,32 @@
+# Ignore datasets and archives
+archive*/
+Rice_Leaf_AUG/
+dataset/
+*.zip
+*.rar
+
+# Ignore Python virtual environments
+myenv/
+venv/
+env/
+.venv/
+
+# Ignore Python & Jupyter cache
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+
+# Ignore OS generated files
+.DS_Store
+Thumbs.db
+# Environment files
+.env
+*.env
+
+# Node dependencies
+node_modules/
+frontend/node_modules/
+
+# Build files
+dist/
+build/
