@@ -5,22 +5,6 @@ Crop Dekho is a lightweight, full-stack computer vision web application designed
 The system uses an **existing, already-trained MobileNetV2 deep learning model** for rice leaf disease classification. The application does **not retrain or modify the model**; it loads the trained model and serves predictions through a FastAPI backend.
 
 ```text
-Farmer
-  ↓
-React Frontend
-  ↓
-FastAPI Backend
-  ↓
-Existing MobileNetV2 Model
-  ↓
-Disease Prediction
-  ↓
-Remedy Engine
-  ↓
-Result & Treatment Dashboard
-```
-
----
 
 ## 🚀 Features
 
@@ -98,37 +82,6 @@ The model was trained and validated using **3,829 augmented rice leaf images** a
 
 ---
 
-# ⚠️ Important: Model Class Order
-
-The model's training notebook (`main.ipynb`) uses Keras' `ImageDataGenerator.flow_from_directory`.
-
-Keras assigns class indices **alphabetically according to the directory names**.
-
-The verified class order is:
-
-```text
-0 → Bacterial_Leaf_Blight
-1 → Brown_Spot
-2 → Healthy_Ric_Leaf
-3 → Leaf_Blast
-4 → Leaf_scald
-5 → Sheath_Blight
-```
-
-> **Important:** Healthy rice leaf is class index `2`, not the last class.
-
-The backend preserves this exact mapping in:
-
-```text
-backend/services/remedy_engine.py
-```
-
-The prediction service also checks that the number of configured classes matches the model's output size.
-
-**Do not reorder `CLASS_NAMES` unless the model is retrained with a different class mapping.**
-
----
-
 # 🛠️ Tech Stack
 
 ## Frontend
@@ -156,56 +109,6 @@ The prediction service also checks that the number of configured classes matches
 * ImageNet pre-trained weights
 * Image classification
 * Softmax prediction
-
----
-
-# 📁 Project Structure
-
-```text
-CROP_DEKHO/
-│
-├── frontend/
-│   ├── src/
-│   │   ├── components/
-│   │   │   ├── Navbar
-│   │   │   ├── Hero
-│   │   │   ├── UploadBox
-│   │   │   ├── ImagePreview
-│   │   │   ├── LoadingState
-│   │   │   ├── PredictionResult
-│   │   │   ├── ConfidenceScore
-│   │   │   ├── RemedyCard
-│   │   │   ├── DiseaseCard
-│   │   │   └── Footer
-│   │   │
-│   │   ├── pages/
-│   │   │   ├── Home
-│   │   │   ├── Detect
-│   │   │   ├── Diseases
-│   │   │   └── About
-│   │   │
-│   │   └── services/
-│   │       └── api.js
-│   │
-│   └── package.json
-│
-├── backend/
-│   ├── app.py
-│   ├── model/
-│   │   └── rice_model_detect_diseases.keras
-│   │
-│   ├── services/
-│   │   ├── predictor.py
-│   │   └── remedy_engine.py
-│   │
-│   ├── requirements.txt
-│   └── .env
-│
-├── README.md
-└── .gitignore
-```
-
----
 
 # ⚙️ Installation & Local Setup
 
@@ -366,35 +269,6 @@ Maximum file size:
 
 ---
 
-## Example Response
-
-```json
-{
-  "disease": "Brown Spot",
-  "confidence": 0.942,
-  "is_healthy": false,
-  "low_confidence": false,
-  "status": "Diseased",
-  "description": "...",
-  "cause": "...",
-  "symptoms": [
-    "..."
-  ],
-  "immediate_actions": [
-    "..."
-  ],
-  "treatment": [
-    "..."
-  ],
-  "prevention": [
-    "..."
-  ],
-  "disclaimer": "..."
-}
-```
-
----
-
 # 📊 Confidence Threshold
 
 The API returns `confidence` as a decimal between `0` and `1`.
@@ -429,98 +303,6 @@ backend/.env
 
 ---
 
-# 🌿 Disease Classes
-
-| Class | Disease               |
-| ----: | --------------------- |
-|     0 | Bacterial Leaf Blight |
-|     1 | Brown Spot            |
-|     2 | Healthy Rice Leaf     |
-|     3 | Leaf Blast            |
-|     4 | Leaf Scald            |
-|     5 | Sheath Blight         |
-
----
-
-# 💡 Remedy Engine
-
-The backend contains a dedicated remedy engine:
-
-```text
-backend/services/remedy_engine.py
-```
-
-It maps each predicted disease to structured agricultural information, including:
-
-* Disease description
-* Possible causes
-* Common symptoms
-* Immediate actions
-* Treatment guidance
-* Prevention strategies
-
-This keeps agricultural guidance separate from the prediction logic and makes the information easier to review or update.
-
----
-
-# ⚠️ Treatment Guidance Disclaimer
-
-The chemical treatment information currently included in the remedy engine is based on commonly published agricultural-extension information.
-
-Treatment recommendations can vary depending on:
-
-* Crop stage
-* Disease severity
-* Geographic location
-* Local agricultural regulations
-* Product availability
-* Approved pesticide labels
-
-**Always confirm chemical treatment and dosage information with a qualified local agricultural extension officer or agriculture department before applying any chemical treatment.**
-
-The application displays a disclaimer alongside treatment information.
-
----
-
-# 🔐 Model Handling
-
-The project uses an **existing trained model**:
-
-```text
-backend/model/rice_model_detect_diseases.keras
-```
-
-The application:
-
-* Loads the model at backend startup.
-* Keeps the model unchanged.
-* Loads the model once rather than loading it for every request.
-* Uses the model only for inference.
-
-This improves prediction performance and avoids unnecessary model-loading overhead.
-
----
-
-# 📌 Key Design Decisions
-
-### Why MobileNetV2?
-
-MobileNetV2 provides a relatively lightweight architecture suitable for applications where computational resources may be limited.
-
-### Why FastAPI?
-
-FastAPI provides a lightweight Python API layer that integrates naturally with TensorFlow/Keras and provides automatic interactive API documentation.
-
-### Why React?
-
-React provides a responsive frontend for image upload, prediction results, confidence visualization, and remedy information.
-
-### Why Separate the Remedy Engine?
-
-Separating prediction from remedy information makes the application easier to maintain and allows agricultural guidance to be reviewed or updated independently of the ML model.
-
----
-
 # 🚀 Future Improvements
 
 Potential future enhancements include:
@@ -528,16 +310,10 @@ Potential future enhancements include:
 * 📱 Progressive Web App / mobile support
 * 🌐 Multi-language support for farmers
 * 🗣️ Voice-based disease guidance
-* 📍 Location-aware agricultural recommendations
-* 🌦️ Weather-based disease risk prediction
-* 📈 Disease history and prediction tracking
 * 🧠 Improved model accuracy with a larger dataset
-* 🔍 Explainable AI / Grad-CAM visualization
 * ☁️ Cloud deployment
-* 📡 Offline or edge inference
 * 🧑‍🌾 Farmer-friendly regional language support
 
----
 
 # 👨‍💻 Project
 
