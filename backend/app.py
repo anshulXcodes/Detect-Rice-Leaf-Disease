@@ -35,11 +35,11 @@ app = FastAPI(
     version="1.0.0",
 )
 
-FRONTEND_ORIGIN = os.getenv("FRONTEND_ORIGIN", "http://localhost:5173")
+FRONTEND_ORIGIN = os.getenv("FRONTEND_ORIGIN", "https://detectriceleafdisease.vercel.app")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[FRONTEND_ORIGIN, "http://127.0.0.1:5173"],
+    allow_origins=["https://detectriceleafdisease.vercel.app"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
