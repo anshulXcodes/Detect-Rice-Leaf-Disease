@@ -6,7 +6,7 @@ The system uses an **existing, already-trained MobileNetV2 deep learning model**
 
 ```text
 
-## 🚀 Features
+🚀 Features
 
 * 🌱 **6-Class Rice Disease Classification**
 
