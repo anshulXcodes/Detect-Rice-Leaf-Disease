@@ -4,56 +4,73 @@ Crop Dekho is a lightweight, full-stack computer vision web application designed
 
 The system uses an **existing, already-trained MobileNetV2 deep learning model** for rice leaf disease classification. The application does **not retrain or modify the model**; it loads the trained model and serves predictions through a FastAPI backend.
 
-```text
+---
 
-🚀 Features
-🌱 6-Class Rice Disease Classification
+# 🚀 Features
+
+## 🌱 6-Class Rice Disease Classification
 
 The system can identify six rice leaf conditions:
 
-Bacterial Leaf Blight
-Brown Spot
-Healthy Rice Leaf
-Leaf Blast
-Leaf Scald
-Sheath Blight
-🤖 AI-Powered Detection
-Uses a fine-tuned MobileNetV2 image classification model.
-Accepts rice leaf images and predicts the most likely disease.
-⚡ CPU / Edge Optimized
-Uses the MobileNetV2 architecture.
-Input resolution: 128 × 128.
-Approximately 8.7 MB model footprint.
-Designed for fast inference on low-resource devices.
-💊 Actionable Remedy Engine
+* Bacterial Leaf Blight
+* Brown Spot
+* Healthy Rice Leaf
+* Leaf Blast
+* Leaf Scald
+* Sheath Blight
+
+## 🤖 AI-Powered Detection
+
+* Uses a fine-tuned MobileNetV2 image classification model.
+* Accepts rice leaf images and predicts the most likely disease.
+
+## ⚡ CPU / Edge Optimized
+
+* Uses the MobileNetV2 architecture.
+* Input resolution: `128 × 128`.
+* Approximately `8.7 MB` model footprint.
+* Designed for fast inference on low-resource devices.
+
+## 💊 Actionable Remedy Engine
 
 For each detected condition, the system provides:
 
-Disease description
-Possible causes
-Symptoms
-Immediate field actions
-Treatment guidance
-Prevention strategies
-📊 Confidence-Based Prediction
-Displays the prediction confidence score.
-Identifies low-confidence predictions.
-Uses a configurable confidence threshold.
-🖥️ Full-Stack Web Application
-Modern React frontend
-FastAPI backend
-REST API communication
-Responsive prediction and result dashboard
-🧠 Model Architecture
+* Disease description
+* Possible causes
+* Symptoms
+* Immediate field actions
+* Treatment guidance
+* Prevention strategies
+
+## 📊 Confidence-Based Prediction
+
+* Displays the prediction confidence score.
+* Identifies low-confidence predictions.
+* Uses a configurable confidence threshold.
+
+## 🖥️ Full-Stack Web Application
+
+* Modern React frontend
+* FastAPI backend
+* REST API communication
+* Responsive prediction and result dashboard
+
+---
+
+# 🧠 Model Architecture
 
 The application uses a trained MobileNetV2-based image classification model.
 
-Base Model
-Architecture: MobileNetV2
-Pre-trained weights: ImageNet
-Input size: 128 × 128 × 3
-Convolutional base: Frozen
-Classification Head
+## Base Model
+
+* **Architecture:** MobileNetV2
+* **Pre-trained weights:** ImageNet
+* **Input size:** `128 × 128 × 3`
+* **Convolutional base:** Frozen
+
+## Classification Head
+
+```text
 MobileNetV2
      ↓
 GlobalAveragePooling2D
@@ -61,8 +78,11 @@ GlobalAveragePooling2D
 Dropout(0.2)
      ↓
 Dense(6, activation="softmax")
+```
 
-### Dataset
+---
+
+# 📊 Dataset
 
 The model was trained and validated using **3,829 augmented rice leaf images** across six classes.
 
@@ -95,6 +115,8 @@ The model was trained and validated using **3,829 augmented rice leaf images** a
 * ImageNet pre-trained weights
 * Image classification
 * Softmax prediction
+
+---
 
 # ⚙️ Installation & Local Setup
 
@@ -240,14 +262,12 @@ Content-Type: multipart/form-data
 Field: file
 ```
 
-Supported image formats:
+### Supported Image Formats
 
-```text
-JPG
-PNG
-```
+* JPG
+* PNG
 
-Maximum file size:
+### Maximum File Size
 
 ```text
 8 MB
@@ -267,7 +287,7 @@ For example:
 
 The application uses a configurable low-confidence threshold.
 
-Default:
+### Default
 
 ```text
 LOW_CONFIDENCE_THRESHOLD=0.60
@@ -300,15 +320,10 @@ Potential future enhancements include:
 * ☁️ Cloud deployment
 * 🧑‍🌾 Farmer-friendly regional language support
 
+---
 
 # 👨‍💻 Project
 
 **Crop Dekho — AI Rice Leaf Disease Detection & Remedy System**
 
 Built using:
-
-```text
-React + FastAPI + TensorFlow/Keras + MobileNetV2
-```
-
-The goal of Crop Dekho is to make AI-assisted rice disease detection faster, simpler, and more accessible for farmers.
