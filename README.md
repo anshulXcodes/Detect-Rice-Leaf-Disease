@@ -7,66 +7,53 @@ The system uses an **existing, already-trained MobileNetV2 deep learning model**
 ```text
 
 🚀 Features
+🌱 6-Class Rice Disease Classification
 
-* 🌱 **6-Class Rice Disease Classification**
+The system can identify six rice leaf conditions:
 
-  * Bacterial Leaf Blight
-  * Brown Spot
-  * Healthy Rice Leaf
-  * Leaf Blast
-  * Leaf Scald
-  * Sheath Blight
+Bacterial Leaf Blight
+Brown Spot
+Healthy Rice Leaf
+Leaf Blast
+Leaf Scald
+Sheath Blight
+🤖 AI-Powered Detection
+Uses a fine-tuned MobileNetV2 image classification model.
+Accepts rice leaf images and predicts the most likely disease.
+⚡ CPU / Edge Optimized
+Uses the MobileNetV2 architecture.
+Input resolution: 128 × 128.
+Approximately 8.7 MB model footprint.
+Designed for fast inference on low-resource devices.
+💊 Actionable Remedy Engine
 
-* 🤖 **AI-Powered Detection**
+For each detected condition, the system provides:
 
-  * Uses a fine-tuned MobileNetV2 image classification model.
-  * Accepts rice leaf images and predicts the most likely disease.
+Disease description
+Possible causes
+Symptoms
+Immediate field actions
+Treatment guidance
+Prevention strategies
+📊 Confidence-Based Prediction
+Displays the prediction confidence score.
+Identifies low-confidence predictions.
+Uses a configurable confidence threshold.
+🖥️ Full-Stack Web Application
+Modern React frontend
+FastAPI backend
+REST API communication
+Responsive prediction and result dashboard
+🧠 Model Architecture
 
-* ⚡ **CPU / Edge Optimized**
+The application uses a trained MobileNetV2-based image classification model.
 
-  * MobileNetV2 architecture
-  * `128 × 128` input resolution
-  * Approximately `8.7 MB` model footprint
-  * Designed for fast inference on low-resource devices.
-
-* 💊 **Actionable Remedy Engine**
-
-  * Disease description
-  * Possible causes
-  * Symptoms
-  * Immediate field actions
-  * Treatment guidance
-  * Prevention strategies
-
-* 📊 **Confidence-Based Prediction**
-
-  * Displays prediction confidence.
-  * Identifies low-confidence predictions.
-  * Configurable confidence threshold.
-
-* 🖥️ **Full-Stack Web Application**
-
-  * Modern React frontend
-  * FastAPI backend
-  * REST API communication
-  * Responsive result dashboard
-
----
-
-# 🧠 Model Architecture
-
-The application uses an existing trained **MobileNetV2** model.
-
-### Base Model
-
-* **Architecture:** MobileNetV2
-* **Pre-trained weights:** ImageNet
-* **Input size:** `128 × 128 × 3`
-* **Convolutional base:** Frozen
-
-### Classification Head
-
-```text
+Base Model
+Architecture: MobileNetV2
+Pre-trained weights: ImageNet
+Input size: 128 × 128 × 3
+Convolutional base: Frozen
+Classification Head
 MobileNetV2
      ↓
 GlobalAveragePooling2D
@@ -74,7 +61,6 @@ GlobalAveragePooling2D
 Dropout(0.2)
      ↓
 Dense(6, activation="softmax")
-```
 
 ### Dataset
 
